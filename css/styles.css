@@ -1,0 +1,36 @@
+body, main{
+  margin: 0px;
+  padding: 0px;
+}
+h1{
+  font-size: 50px;
+  font-weight: 700;
+}
+
+#feedback-toast{
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 9999;
+}
+
+.helloFriend{
+  animation: helloFriend 5s ease infinite;
+}
+
+@keyframes helloFriend{
+  0%{
+      left: 150px;
+      top: 100px;
+  }
+  50%{
+      left: 150px;
+      top: 100px;
+      color: black;
+  }
+  100%{
+      left: 150px;
+      top: 100px;
+  }
+  
+}
