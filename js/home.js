@@ -3,8 +3,9 @@ function getLocalStorage(key) {
 }
 
 const userLogged = getLocalStorage("userLogged");
-
 const listUser = getLocalStorage("listUser")
+const formRecados = document.getElementById("recados-form");
+const deleteModal = new bootstrap.Modal("#delete-modal")
 
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -14,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function(){
    }
 
 })
-
-const formRecados = document.getElementById("recados-form");
 
 formRecados.addEventListener ("submit", function(event) {
   event.preventDefault()
@@ -30,7 +29,6 @@ formRecados.addEventListener ("submit", function(event) {
 
   userLogged.recados.push(novoRecado);
 
-
   event.target.reset()
   saveOnStorage();
   renderTable();
@@ -43,7 +41,6 @@ function saveOnStorage() {
   const findUser = listUser.findIndex((usuario) => usuario.email === userLogged.email) 
 
   listUser[findUser] = userLogged
-
   localStorage.setItem("listUser", JSON.stringify(listUser));
 }
 
@@ -58,7 +55,7 @@ function renderTable () {
               <td class="m-1">${user.description}</td>
               <td class="m-1">${user.detalhamento}</td>
               <td>
-                  <button onclick="deleteErrand(${index})" data-bs-target="#modalDelete" class="col-12 col-md-3 col-lg-3 mb-1 btn btn-primary btn-success" type="button">Apagar</button>
+                  <button onclick="deleteErrand(${index})" class="col-12 col-md-3 col-lg-3 mb-1 btn btn-primary btn-success" type="button">Apagar</button>
                   <button onclick="editErrand(${index})" class="col-12 col-md-3 col-lg-3 mb-1 btn btn-primary btn-danger" type="button">Editar</button>
               </td>
           </tr>
@@ -68,21 +65,23 @@ function renderTable () {
 }
 renderTable();
 
+
 function deleteErrand(index) {
+ 
+  const confirmeDelete = confirm("Deseja excluir o recado?")
 
-  const confirmaDelete = confirm("Deseja excluir o recado?")
-
-  if(confirmaDelete){
-    userLogged.recados.splice(index, 1);
-    renderTable();
-    saveOnStorage()
+  if(confirmeDelete)
+  userLogged.recados.splice(index, 1);
+  renderTable();
+  saveOnStorage();
   }
-}
+
+
+
 
 function editErrand(index) {
   const newDescricao = prompt("Digite descrição");
   const novoDetalhamento = prompt("Digite o recado");
-
 
   userLogged.recados[index].description = newDescricao;
   userLogged.recados[index].detalhamento = novoDetalhamento;

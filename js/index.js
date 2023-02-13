@@ -79,7 +79,7 @@ formIndex.addEventListener("submit", function(event) {
 
 formLogin.addEventListener('submit', function (event){
     event.preventDefault()
-      
+    
     const emailLogin = document.getElementById("email-login").value
     const passwordLogin = document.getElementById("password-login").value
 
